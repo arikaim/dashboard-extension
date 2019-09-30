@@ -1,0 +1,8 @@
+{% set items = service('event').trigger('dashboard.get.items') %}
+{% set items = (items is iterable) ? items : [] %}
+<div class="ui seven cards pl-4 mt-2">     
+    {{ component("dashboard::admin.dashboard.about") }}          
+    {% for item in items %}
+        {{ component(item) }}       
+    {% endfor %}
+</div>
