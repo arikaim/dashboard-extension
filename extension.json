@@ -5,7 +5,7 @@
     "type": "user",
     "description": "Control Panel Dashboard",
     "short_description": "Dashboard",
-    "version": "1.0",
+    "version": "1.0.1",
     "position": "1",
     "admin_menu": {        
         "title": "Dashboard",
