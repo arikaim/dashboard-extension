@@ -4,7 +4,7 @@
  *
  * @link        http://www.arikaim.com
  * @copyright   Copyright (c) 2016-2018 Konstantin Atanasov <info@arikaim.com>
- * @license     http://www.arikaim.com/license.html
+ * @license     http://www.arikaim.com/license
  * 
 */
 namespace Arikaim\Extensions\Dashboard;
@@ -19,7 +19,7 @@ class Dashboard extends Extension
     /**
      * Install extension
      *
-     * @return void
+     * @return boolean
      */
     public function install()
     {
@@ -27,5 +27,15 @@ class Dashboard extends Extension
         $this->registerEvent('dashboard.get.items','Trigger on show dashboard page');
      
         return true;
-    }   
+    }
+    
+    /**
+     * UnInstall extension
+     *
+     * @return boolean
+     */
+    public function unInstall()
+    {
+        return true;
+    }
 }

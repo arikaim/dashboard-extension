@@ -6,6 +6,12 @@
 <div class="ui seven cards pl-4 mt-2">     
     {{ component("dashboard::admin.dashboard.about") }}          
     {% for item in items %}
-        {{ component(item) }}       
+        {% if item is iterable %}   
+            {% for panel in item %}
+                {{ component(panel) }}
+            {% endfor %}
+        {% else %}
+            {{ component(item) }}
+        {% endif %}       
     {% endfor %}
 </div>
