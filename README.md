@@ -10,7 +10,7 @@ Dashboard extension
   * [Arikaim CMS](https://github.com/arikaim/arikaim)
   
 
-### Install
+#### Install
 
 ```bash
 
