@@ -11,9 +11,6 @@ Dashboard extension
   
 
 #### Install
-
-```bash
-
+```sh
 composer require arikaim/dashboard-extension
-
 ```

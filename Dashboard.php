@@ -19,23 +19,20 @@ class Dashboard extends Extension
     /**
      * Install extension
      *
-     * @return boolean
+     * @return void
      */
     public function install()
     {
         // Events
         $this->registerEvent('dashboard.get.items','Trigger on show dashboard page');
-     
-        return true;
     }
     
     /**
      * UnInstall extension
      *
-     * @return boolean
+     * @return void
      */
     public function unInstall()
-    {
-        return true;
+    {  
     }
 }

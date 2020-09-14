@@ -6,13 +6,13 @@
     "type": "user",
     "description": "Control Panel Dashboard",
     "short-description": "Dashboard",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "position": "1",
     "repository": "https://github.com/arikaim/dashboard-extension.git",
     "admin-menu": {        
         "title": "Dashboard",
         "icon": "dashboard",       
-        "page-icon": "home",
+        "page-icon": "dashboard",
         "page-title": "Dashboard", 
         "component": "dashboard::admin.dashboard"
     }
