@@ -1,17 +1,24 @@
-{% set items = service('event').dispatch('dashboard.get.items') %}
+{% set items = service('event').dispatch('dashboard.get.items',[_context]) %}
 {% set items = (items is iterable) ? items : [] %}
-<div class="mt-10">
-    
-</div>
-<div class="ui seven cards pl-4 mt-2">     
-    {{ component("dashboard::admin.dashboard.about") }}          
-    {% for item in items %}
-        {% if item is iterable %}   
-            {% for panel in item %}
-                {{ component(panel) }}
-            {% endfor %}
-        {% else %}
-            {{ component(item) }}
-        {% endif %}       
-    {% endfor %}
+{% set column_class = column_class|default('two wide') %}
+<div class="mt-4 pl-4">
+    <div class="ui stackable stretched grid">  
+        <div class="{{ column_class }} column">   
+        {{ component("dashboard::admin.dashboard.about") }}  
+        </div>        
+        {% for item in items %}
+            {% if item.components is iterable %}   
+                {% for panel in item.components %}
+                <div class="{{ (panel.class is empty) ? column_class : panel.class }} column">
+                    {{ component(panel.component) }}
+                </div>                   
+                {% endfor %}
+            {% else  %}       
+                {% set component_name = (item.component is not empty) ? item.component : item %}       
+                <div class="{{ (item.class is empty) ? column_class : item.class }} column">
+                {{ component(component_name) }}
+                </div>
+            {% endif %}       
+        {% endfor %}
+    </div>
 </div>
