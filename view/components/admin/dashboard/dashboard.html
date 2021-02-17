@@ -1,4 +1,4 @@
-{% set items = service('event').dispatch('dashboard.get.items',[_context]) %}
+{% set items = service('event').dispatch('dashboard.get.items',[]) %}
 {% set items = (items is iterable) ? items : [] %}
 {% set column_class = column_class|default('two wide') %}
 <div class="mt-4 pl-4">
