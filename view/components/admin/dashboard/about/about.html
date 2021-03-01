@@ -1,3 +1,4 @@
+{% set info = system().getSystemInfo()  %}
 <div class="ui card raised">
     <h3 class="bg-gray-300 p-4">
         <i class="icon info circle blue"></i>
@@ -5,6 +6,12 @@
     </h3>
     <div class="p-4 mt-2 mb-10">
         <h3>Arikaim CMS</h3>
-        {{ labels.version }} {{ getVersion() }}
+        {{ labels.version }} {{ info.core }}
+
+        <div class="mt-4">
+            <a class="link" href="http://arikaim.com/documentation" target="_blank">
+                {{ labels.docs }}
+            </a>
+        </div>
     </div>   
 </div>
