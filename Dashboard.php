@@ -23,8 +23,13 @@ class Dashboard extends Extension
      */
     public function install()
     {
+        // Control Panel
+        $this->addApiRoute('PUT','/api/admin/dashboard/hide','DashboardControlPanel','hidePanel','session');      
+        $this->addApiRoute('PUT','/api/admin/dashboard/show','DashboardControlPanel','showPanel','session');  
         // Events
         $this->registerEvent('dashboard.get.items','Trigger on show dashboard page');
+        // Db Models
+        $this->createDbTable('DashboardSchema');    
     }
     
     /**

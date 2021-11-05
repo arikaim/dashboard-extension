@@ -1,24 +1,42 @@
 {% set items = service('event').dispatch('dashboard.get.items',[]) %}
 {% set items = (items is iterable) ? items : [] %}
 {% set column_class = column_class|default('two wide') %}
-<div class="mt-4 pl-4">
-    <div class="ui stackable stretched grid">  
-        <div class="{{ column_class }} column">   
-        {{ component("dashboard::admin.dashboard.about") }}  
-        </div>        
-        {% for item in items %}
-            {% if item.components is iterable %}   
-                {% for panel in item.components %}
-                <div class="{{ (panel.class is empty) ? column_class : panel.class }} column">
-                    {{ component(panel.component) }}
-                </div>                   
+{% set model = createModel('Dashboard','dashboard') %}
+<div class="pl-4">
+    <div class="pb-4">
+        <button class="ui circular mini primary icon button dasboard-settings">
+            <i class="icon cog"></i>
+        </button>
+    </div>
+    <div class="flex flex-row items-start">
+        <div class="hidden w-64 p-2" id="dashboard_settings_content">
+        </div>
+        <div class="px-4 flex-grow">
+            <div class="ui stackable stretched grid">  
+                <div class="{{ column_class }} column">   
+                    {{ component("dashboard::admin.dashboard.about") }}  
+                </div>        
+                {% for item in items %}
+                   
+                    {% if item.components is iterable %}   
+                        {% for panel in item.components %}
+                            {% if model.isVisible(panel.component) %}
+                            <div class="{{ (panel.class is empty) ? column_class : panel.class }} column">
+                                {{ component(panel.component) }}
+                            </div>          
+                            {% endif %}            
+                        {% endfor %}
+                    {% else %}       
+                        {% set component_name = (item.component is not empty) ? item.component : item %}       
+                        {% if model.isVisible(component_name) %}
+                            <div class="{{ (item.class is empty) ? column_class : item.class }} column">
+                                {{ component(component_name) }}
+                            </div>
+                        {% endif %}
+                    {% endif %}    
+                   
                 {% endfor %}
-            {% else  %}       
-                {% set component_name = (item.component is not empty) ? item.component : item %}       
-                <div class="{{ (item.class is empty) ? column_class : item.class }} column">
-                {{ component(component_name) }}
-                </div>
-            {% endif %}       
-        {% endfor %}
+            </div>
+        </div>       
     </div>
 </div>
