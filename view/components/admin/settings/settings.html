@@ -8,25 +8,27 @@
             {% if item.components is iterable %}   
                 {% for panel in item.components %}
                     {% set visible = model.isVisible(panel.component) %}
-                    {% set extension = panel.component|split('::')[0] %}                
-                    <div class="item">
-                        {{ panel.component }}
-                    </div>                                    
+                    {% set extension = panel.component|split('::')[0] %}  
+                    
+                    {{  component('dashboard::admin.settings.item',{ 
+                            visible: visible,
+                            component_name: panel.component,
+                            extension: extension
+                        }) 
+                    }} 
+                                              
                 {% endfor %}
             {% else %}                  
                 {% set component_name = (item.component is not empty) ? item.component : item %}      
                 {% set visible = model.isVisible(component_name) %} 
-                {% set extension = component_name|split('::')[0] %}       
-                <div class="item">
-                    <div class="flex flex-row items-center">
-                        <button class="ui button mini icon basic compact ">
-                            <i class="icon outline eye"></i>
-                        </button>                       
-                        <span class="font-bold px-2">
-                            {{ extension }}
-                        </span>
-                    </div>                                             
-                </div>              
+                {% set extension = component_name|split('::')[0] %}    
+                
+                {{  component('dashboard::admin.settings.item',{ 
+                        visible: visible,
+                        component_name: component_name,
+                        extension: extension
+                    }) 
+                }}           
             {% endif %}               
         {% endfor %}
     </div>
