@@ -1,6 +1,6 @@
 {% set items = service('event').dispatch('dashboard.get.items',[]) %}
 {% set items = (items is iterable) ? items : [] %}
-{% set column_class = column_class|default('two wide') %}
+{% set column_class = column_class|default('three wide') %}
 {% set model = createModel('Dashboard','dashboard') %}
 
 <div class="ui stackable stretched grid">  
@@ -8,7 +8,6 @@
         {{ component("dashboard::admin.dashboard.about") }}  
     </div>        
     {% for item in items %}  
-
         {% if item.components is iterable %}   
             {% for panel in item.components %}
                 {% set visible = (hasTable('dashboard') == true) ? model.isVisible(panel.component) : true  %}
@@ -27,6 +26,5 @@
                 </div>
             {% endif %}
         {% endif %}    
-        
     {% endfor %}
 </div>
