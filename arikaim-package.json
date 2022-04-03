@@ -14,6 +14,6 @@
         "icon": "dashboard",       
         "page-icon": "dashboard",
         "page-title": "Dashboard", 
-        "component": "dashboard::admin.dashboard"
+        "component": "dashboard::admin"
     }
 }

@@ -2,7 +2,6 @@
 {% set items = (items is iterable) ? items : [] %}
 {% set column_class = column_class|default('three wide') %}
 {% set model = createModel('Dashboard','dashboard') %}
-
 <div class="ui stackable stretched grid">  
     <div class="{{ column_class }} column">   
         {{ component("dashboard::admin.dashboard.about") }}  
