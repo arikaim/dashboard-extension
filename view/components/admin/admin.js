@@ -10,19 +10,15 @@
     var self = this;
  
     this.hidePanel = function(name, onSuccess, onError) {
-        var data = {
+        return arikaim.put('/api/admin/dashboard/hide',{
             component_name: name
-        }
-
-        return arikaim.put('/api/admin/dashboard/hide',data,onSuccess,onError);          
+        },onSuccess,onError);          
     };
  
     this.showPanel = function(name, onSuccess, onError) { 
-        var data = { 
+        return arikaim.put('/api/admin/dashboard/show',{ 
             component_name: name
-        };
-        
-        return arikaim.put('/api/admin/dashboard/show',data,onSuccess,onError);           
+        },onSuccess,onError);           
     };   
  
     this.initSettings = function() {

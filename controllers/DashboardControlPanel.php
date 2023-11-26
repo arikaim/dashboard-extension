@@ -38,19 +38,19 @@ class DashboardControlPanel extends ControlPanelApiController implements Control
     */
     public function hidePanelController($request, $response, $data)
     { 
-        $this->onDataValid(function($data) {
-            $componentName = $data->get('component_name');
-            $model = Model::Dashboard('dashboard');
-         
-            $result = $model->hidePanel($componentName);
+        $data
+            ->validate(true);
+            
+        $componentName = $data->get('component_name');
+        $model = Model::Dashboard('dashboard');
+        
+        $result = $model->hidePanel($componentName);
 
-            $this->setResponse($result,function() use($componentName) {            
-                $this
-                    ->message('hide')
-                    ->field('component_name',$componentName);  
-            },'errors.hide');
-        }); 
-        $data->validate();
+        $this->setResponse($result,function() use($componentName) {            
+            $this
+                ->message('hide')
+                ->field('component_name',$componentName);  
+        },'errors.hide'); 
     }
 
     /**
@@ -63,18 +63,18 @@ class DashboardControlPanel extends ControlPanelApiController implements Control
     */
     public function showPanelController($request, $response, $data)
     { 
-        $this->onDataValid(function($data) {
-            $componentName = $data->get('component_name');
-            $model = Model::Dashboard('dashboard');
-         
-            $result = $model->showPanel($componentName);
+        $data
+            ->validate(true);
 
-            $this->setResponse($result,function() use($componentName) {            
-                $this
-                    ->message('hide')
-                    ->field('component_name',$componentName);  
-            },'errors.hide');
-        }); 
-        $data->validate();
+        $componentName = $data->get('component_name');
+        $model = Model::Dashboard('dashboard');
+        
+        $result = $model->showPanel($componentName);
+
+        $this->setResponse($result,function() use($componentName) {            
+            $this
+                ->message('hide')
+                ->field('component_name',$componentName);  
+        },'errors.hide');
     }
 }

@@ -50,6 +50,24 @@ class Dashboard extends Model
     public $timestamps = false;
 
     /**
+     * Find or create
+     *
+     * @param string $componentName
+     * @return object|null
+     */
+    public function findOrCreate(string $componentName): ?object
+    {
+        $model = $this->findByColumn($componentName,'component_name');
+        if ($model == null) {
+            $model = $this->create([
+                'component_name' => $componentName
+            ]);
+        }
+
+        return $model;
+    }
+
+    /**
      * Hide dashboard panel 
      *
      * @param string $componentName
@@ -57,14 +75,9 @@ class Dashboard extends Model
      */
     public function hidePanel(string $componentName): bool
     {
-        $model = $this->where('component_name','=',$componentName)->first();
-        if (\is_object($model) == false) {
-            $model = $this->create([
-                'component_name' => $componentName
-            ]);
-        }
+        $model = $this->findOrCreate($componentName);
 
-        return $model->setStatus(0);
+        return ($model == null) ? false : $model->setStatus(0);
     }
 
     /**
@@ -75,14 +88,9 @@ class Dashboard extends Model
      */
     public function showPanel(string $componentName): bool
     {
-        $model = $this->where('component_name','=',$componentName)->first();
-        if (\is_object($model) == false) {
-            $model = $this->create([
-                'component_name' => $componentName
-            ]);
-        }
+        $model = $this->findOrCreate($componentName);
 
-        return $model->setStatus(1);
+        return ($model == null) ? false : $model->setStatus(1);
     }
 
     /**
@@ -93,15 +101,12 @@ class Dashboard extends Model
      */
     public function isHidden(string $componentName): bool
     {
-        if (empty($componentName) == true) {
-            return false;
-        }
-        $model = $this->where('component_name','=',$componentName)->first();
-        
-        return (\is_object($model) == false) ? false : ($model->status != 1);
+        $model = $this->findByColumn($componentName,'component_name');
+
+        return ($model == null) ? false : ($model->status != 1);
     }
 
-     /**
+    /**
      * Return true if panel is visible
      *
      * @param string $componentName
@@ -109,11 +114,8 @@ class Dashboard extends Model
      */
     public function isVisible(string $componentName): bool
     {
-        if (empty($componentName) == true) {
-            return false;
-        }
-        $model = $this->where('component_name','=',$componentName)->first();
+        $model = $this->findByColumn($componentName,'component_name');
         
-        return (\is_object($model) == false) ? true : ($model->status == 1);
+        return ($model == null) ? true : ($model->status == 1);
     }
 }
