@@ -14,7 +14,7 @@ use Arikaim\Core\Db\Schema;
 /**
  * Dashboard db table
  */
-class DashboardSchema extends Schema  
+class Dashboard extends Schema  
 {    
     /**
      * Table name

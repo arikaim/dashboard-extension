@@ -29,7 +29,7 @@ class Dashboard extends Extension
         // Events
         $this->registerEvent('dashboard.get.items','Trigger on show dashboard page');
         // Db Models
-        $this->createDbTable('DashboardSchema');    
+        $this->createDbTable('Dashboard');    
     }
     
     /**
